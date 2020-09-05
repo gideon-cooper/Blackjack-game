@@ -1,11 +1,14 @@
 import React from "react"
+import { Route, Link } from "react-router-dom"
+
+import Game from "./components/Game"
 
 import "./App.scss"
 
 function App() {
   return (
     <div className="App">
-      <h1>Heyy</h1>
+      <Route path="/" component={Game} />
     </div>
   )
 }
