@@ -13,7 +13,7 @@ export const getDeck = () => {
 }
 export const beginningDraw = () => {
   return request
-    .get(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
+    .get(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
     .then((resp) => {
       console.log(resp.body.cards)
       return resp.body.cards
