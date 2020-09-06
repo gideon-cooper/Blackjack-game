@@ -5,12 +5,12 @@ import Game from "./components/Game"
 
 import "./App.scss"
 
-function App() {
-  return (
-    <div className="App">
-      <Route path="/" component={Game} />
-    </div>
-  )
+export default class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <Route path="/" component={Game} />
+      </div>
+    )
+  }
 }
-
-export default App
