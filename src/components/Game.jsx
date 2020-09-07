@@ -7,8 +7,12 @@ export default class Game extends Component {
   state = {
     firstCard: "",
     secondCard: "",
+    thirdCard: "",
+    fourthCard:
+      "https://i.pinimg.com/originals/10/80/a4/1080a4bd1a33cec92019fab5efb3995d.png",
     firstValue: "",
     secondValue: "",
+    thirdValue: "",
     bet: 0,
     money: 100,
     total: 0,
@@ -20,8 +24,10 @@ export default class Game extends Component {
       this.setState({
         firstCard: resp[0].image,
         secondCard: resp[1].image,
+        thirdCard: resp[2].image,
         firstValue: resp[0].value,
         secondValue: resp[1].value,
+        thirdValue: resp[2].value,
         showSecondPhase: true,
         showGame: false,
       })
@@ -46,8 +52,42 @@ export default class Game extends Component {
     return (
       <>
         <div>
-          <img src={this.state.firstCard} alt="" />
-          <img src={this.state.secondCard} alt="" />
+          <img
+            style={{
+              display: this.state.showGame ? "none" : "inline",
+              width: "200px",
+              height: "280px",
+            }}
+            src={this.state.firstCard}
+            alt=""
+          />
+          <img
+            style={{
+              display: this.state.showGame ? "none" : "inline",
+              width: "200px",
+              height: "280px",
+            }}
+            src={this.state.secondCard}
+            alt=""
+          />
+          <img
+            style={{
+              display: this.state.showGame ? "none" : "inline",
+              width: "200px",
+              height: "280px",
+            }}
+            src={this.state.thirdCard}
+            alt=""
+          />
+          <img
+            style={{
+              display: this.state.showGame ? "none" : "inline",
+              width: "200px",
+              height: "280px",
+            }}
+            src={this.state.fourthCard}
+            alt=""
+          />
           <SecondPhase
             total={this.state.total}
             money={this.state.money}
@@ -55,6 +95,8 @@ export default class Game extends Component {
             showSecondPhase={this.state.showSecondPhase}
             firstValue={this.state.firstValue}
             secondValue={this.state.secondValue}
+            thirdValue={this.state.thirdValue}
+            showGame={this.state.showGame}
           />
           <div style={{ display: this.state.showGame ? "block" : "none" }}>
             <button onClick={this.a}>Deal</button>
