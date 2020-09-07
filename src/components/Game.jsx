@@ -7,12 +7,13 @@ export default class Game extends Component {
   state = {
     firstCard: "",
     secondCard: "",
-    firstValue: null,
-    secondValue: null,
+    firstValue: "",
+    secondValue: "",
     bet: 0,
     money: 100,
     total: 0,
     showSecondPhase: false,
+    showGame: true,
   }
   a = () => {
     beginningDraw().then((resp) => {
@@ -22,6 +23,7 @@ export default class Game extends Component {
         firstValue: resp[0].value,
         secondValue: resp[1].value,
         showSecondPhase: true,
+        showGame: false,
       })
     })
   }
@@ -51,15 +53,19 @@ export default class Game extends Component {
             money={this.state.money}
             bet={this.state.bet}
             showSecondPhase={this.state.showSecondPhase}
+            firstValue={this.state.firstValue}
+            secondValue={this.state.secondValue}
           />
-          <button onClick={this.a}>Deal</button>
-          <button onClick={this.increaseBet}>5</button>
-          <button onClick={this.increaseBet}>10</button>
-          <button onClick={this.increaseBet}>20</button>
-          <button onClick={this.increaseBet}>50</button>
-          <h2>{this.state.total}</h2>
-          <h2>Bet: {this.state.bet}</h2>
-          <h2>Money: {this.state.money}</h2>
+          <div style={{ display: this.state.showGame ? "block" : "none" }}>
+            <button onClick={this.a}>Deal</button>
+            <button onClick={this.increaseBet}>5</button>
+            <button onClick={this.increaseBet}>10</button>
+            <button onClick={this.increaseBet}>20</button>
+            <button onClick={this.increaseBet}>50</button>
+            <h2>{this.state.total}</h2>
+            <h2>Bet: {this.state.bet}</h2>
+            <h2>Money: {this.state.money}</h2>
+          </div>
         </div>
       </>
     )
