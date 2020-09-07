@@ -8,8 +8,7 @@ export default class Game extends Component {
     firstCard: "",
     secondCard: "",
     thirdCard: "",
-    fourthCard:
-      "https://i.pinimg.com/originals/10/80/a4/1080a4bd1a33cec92019fab5efb3995d.png",
+
     firstValue: "",
     secondValue: "",
     thirdValue: "",
@@ -18,6 +17,7 @@ export default class Game extends Component {
     total: 0,
     showSecondPhase: false,
     showGame: true,
+    first: false,
   }
   a = () => {
     beginningDraw().then((resp) => {
@@ -30,6 +30,7 @@ export default class Game extends Component {
         thirdValue: resp[2].value,
         showSecondPhase: true,
         showGame: false,
+        first: true,
       })
     })
   }
@@ -52,51 +53,19 @@ export default class Game extends Component {
     return (
       <>
         <div>
-          <img
-            style={{
-              display: this.state.showGame ? "none" : "inline",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.state.firstCard}
-            alt=""
-          />
-          <img
-            style={{
-              display: this.state.showGame ? "none" : "inline",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.state.secondCard}
-            alt=""
-          />
-          <img
-            style={{
-              display: this.state.showGame ? "none" : "inline",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.state.thirdCard}
-            alt=""
-          />
-          <img
-            style={{
-              display: this.state.showGame ? "none" : "inline",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.state.fourthCard}
-            alt=""
-          />
           <SecondPhase
             total={this.state.total}
             money={this.state.money}
             bet={this.state.bet}
             showSecondPhase={this.state.showSecondPhase}
+            firstCard={this.state.firstCard}
+            secondCard={this.state.secondCard}
+            thirdCard={this.state.thirdCard}
             firstValue={this.state.firstValue}
             secondValue={this.state.secondValue}
             thirdValue={this.state.thirdValue}
             showGame={this.state.showGame}
+            first={this.state.first}
           />
           <div style={{ display: this.state.showGame ? "block" : "none" }}>
             <button onClick={this.a}>Deal</button>

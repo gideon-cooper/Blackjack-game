@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Link, Redirect } from "react-router-dom"
 import { getDeck, beginningDraw, hit } from "../Cards"
+import GameOver from "./GameOver"
 
 export default class Game extends Component {
   state = {
@@ -8,7 +9,16 @@ export default class Game extends Component {
     dealerTotal: 0,
     hitCard: "",
     hitTime: false,
+    firstCard: this.props.firstCard,
+    secondCard: this.props.secondCard,
+    thirdCard: this.props.thirdCard,
+    fourthCard:
+      "https://i.pinimg.com/originals/10/80/a4/1080a4bd1a33cec92019fab5efb3995d.png",
+    showGame: false,
+    hitValue: 0,
+    over: false,
   }
+
   calculateScore = () => {
     console.log(this.props.firstValue)
     if (
@@ -49,21 +59,69 @@ export default class Game extends Component {
       return (this.state.dealerTotal += Number(this.props.thirdValue))
     }
   }
+  hitScore = () => {
+    console.log("ASD")
+    if (
+      this.state.hitValue === "KING" ||
+      this.state.hitValue === "QUEEN" ||
+      this.state.hitValue === "JACK"
+    ) {
+      this.setState({ total: (this.state.total += 10) })
+    } else {
+      console.log("ASD")
+      this.setState({
+        total: (this.state.total += Number(this.state.hitValue)),
+      })
+    }
+  }
   b = () => {
     hit().then((resp) => {
-      console.log(resp)
-      this.setState({
-        hitCard: resp[0].image,
-        hitTime: true,
-      })
+      this.setState(
+        {
+          hitCard: resp[0].image,
+          hitValue: resp[0].value,
+          hitTime: true,
+        },
+        () => {
+          this.hitScore()
+        }
+      )
     })
   }
+
   render() {
-    this.calculateScore()
-    this.dealerScore()
+    if (this.state.hitTime === false) {
+      this.calculateScore()
+      this.dealerScore()
+    }
+    if (this.state.total > 21 && this.state.over !== true) {
+      this.setState({
+        over: true,
+      })
+    }
+
     return (
       <>
         <div style={{ display: this.props.showSecondPhase ? "block" : "none" }}>
+          <GameOver show={this.state.over} />
+          <img
+            style={{
+              display: this.state.showGame ? "none" : "inline",
+              width: "200px",
+              height: "280px",
+            }}
+            src={this.props.firstCard}
+            alt=""
+          />
+          <img
+            style={{
+              display: this.state.showGame ? "none" : "inline",
+              width: "200px",
+              height: "280px",
+            }}
+            src={this.props.secondCard}
+            alt=""
+          />
           <img
             style={{
               display: this.state.hitTime ? "inline" : "none",
@@ -73,6 +131,25 @@ export default class Game extends Component {
             src={this.state.hitCard}
             alt=""
           />
+          <img
+            style={{
+              display: this.state.showGame ? "none" : "inline",
+              width: "200px",
+              height: "280px",
+            }}
+            src={this.props.thirdCard}
+            alt=""
+          />
+          <img
+            style={{
+              display: this.state.showGame ? "none" : "inline",
+              width: "200px",
+              height: "280px",
+            }}
+            src={this.state.fourthCard}
+            alt=""
+          />
+
           <button onClick={this.b}>Hit</button>
           <button>Stand</button>
           <h2>{this.state.total}</h2>
