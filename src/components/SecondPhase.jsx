@@ -252,6 +252,11 @@ export default class SecondPhase extends Component {
 
           <button onClick={this.hitDraw}>Hit</button>
           <button onClick={this.dealerDraw}>Stand</button>
+          <button
+            style={{ display: this.state.hitValue !== 0 ? "none" : "inline" }}
+          >
+            Double
+          </button>
           <h2>{this.state.total}</h2>
           <h2>Bet: {this.props.bet}</h2>
           <h2>Money: {this.props.money}</h2>

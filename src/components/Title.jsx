@@ -9,7 +9,7 @@ export default class Title extends Component {
     return (
       <div>
         {this.props.bet}
-        <Link
+        <Redirect
           to={{
             pathname: "/",
             money: this.props.location.money,
@@ -17,7 +17,7 @@ export default class Title extends Component {
           }}
         >
           asd
-        </Link>
+        </Redirect>
       </div>
     )
   }
