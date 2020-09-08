@@ -8,7 +8,6 @@ export default class Game extends Component {
     firstCard: "",
     secondCard: "",
     thirdCard: "",
-
     firstValue: "",
     secondValue: "",
     thirdValue: "",

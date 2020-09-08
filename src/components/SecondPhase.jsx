@@ -42,6 +42,15 @@ export default class Game extends Component {
       this.props.secondValue === "JACK"
     ) {
       return (this.state.total += 10 + Number(this.props.firstValue))
+    } else if (
+      this.props.firstValue === "ACE" &&
+      this.props.secondValue === "ACE"
+    ) {
+      return (this.state.total += 12)
+    } else if (this.props.firstValue === "ACE") {
+      return (this.state.total += 11 + Number(this.props.secondValue))
+    } else if (this.props.secondValue === "ACE") {
+      return (this.state.total += 11 + Number(this.props.firstValue))
     } else {
       return (this.state.total +=
         Number(this.props.firstValue) + Number(this.props.secondValue))
@@ -55,6 +64,8 @@ export default class Game extends Component {
       this.props.thirdValue === "JACK"
     ) {
       return (this.state.dealerTotal += 10)
+    } else if (this.props.thirdValue === "ACE") {
+      return (this.state.dealerTotal += 11)
     } else {
       return (this.state.dealerTotal += Number(this.props.thirdValue))
     }
@@ -67,6 +78,11 @@ export default class Game extends Component {
       this.state.hitValue === "JACK"
     ) {
       this.setState({ total: (this.state.total += 10) })
+    } else if (this.state.hitValue === "ACE") {
+      if ((this.state.total += 11 > 21)) {
+        this.setState({ total: (this.state.total += 1) })
+      }
+      this.setState({ total: (this.state.total += 11) })
     } else {
       console.log("ASD")
       this.setState({
