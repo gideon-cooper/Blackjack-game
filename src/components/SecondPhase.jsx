@@ -170,19 +170,26 @@ export default class SecondPhase extends Component {
       this.calculateScore()
       this.dealerScore()
     }
-    if (this.state.total > 21 && this.state.over !== true) {
+    if (this.state.total === 21) {
+      const b = this.props.bet * 2.5 + this.props.money
+      this.setState({
+        over: true,
+        winnings: b,
+      })
+    } else if (
+      this.state.total < 21 &&
+      this.state.dealerTotal >= 17 &&
+      this.state.over !== true
+    ) {
       const a = this.props.bet * 2 + this.props.money
-      console.log("----")
-      console.log(a)
-      console.log("----")
       this.setState({
         over: true,
         winnings: a,
       })
-    }
-    if (this.state.dealerTotal >= 17 && this.state.over !== true) {
+    } else if (this.state.total > 21 && this.state.over !== true) {
       this.setState({
         over: true,
+        winnings: this.props.money,
       })
     }
 
