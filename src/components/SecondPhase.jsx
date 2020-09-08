@@ -15,6 +15,9 @@ export default class Game extends Component {
     fourthCard:
       "https://i.pinimg.com/originals/10/80/a4/1080a4bd1a33cec92019fab5efb3995d.png",
     fourthValue: "",
+    fifthCard:
+      "https://i.pinimg.com/originals/10/80/a4/1080a4bd1a33cec92019fab5efb3995d.png",
+    fifthValue: "",
     showGame: false,
     hitValue: 0,
     over: false,
@@ -91,15 +94,11 @@ export default class Game extends Component {
       })
     }
   }
-  standDraw = () => {
+  standDraw = (value) => {
     console.log(this.props.firstValue)
-    if (
-      this.state.fourthValue === "KING" ||
-      this.state.fourthValue === "QUEEN" ||
-      this.state.fourthValue === "JACK"
-    ) {
+    if (value === "KING" || value === "QUEEN" || value === "JACK") {
       this.setState({ dealerTotal: (this.state.dealerTotal += 10) })
-    } else if (this.state.fourthValue === "ACE") {
+    } else if (value === "ACE") {
       if ((this.state.dealerTotal += 11 > 21)) {
         this.setState({ dealerTotal: (this.state.dealerTotal += 1) })
       }
@@ -108,7 +107,7 @@ export default class Game extends Component {
       })
     } else {
       this.setState({
-        dealerTotal: (this.state.dealerTotal += Number(this.state.fourthValue)),
+        dealerTotal: (this.state.dealerTotal += Number(value)),
       })
     }
   }
@@ -128,16 +127,27 @@ export default class Game extends Component {
   }
   dealerDraw = () => {
     hit().then((resp) => {
-      console.log(resp)
-      this.setState(
-        {
-          fourthCard: resp[0].image,
-          fourthValue: resp[0].value,
-        },
-        () => {
-          this.standDraw()
-        }
-      )
+      if (this.state.fourthValue === "") {
+        this.setState(
+          {
+            fourthCard: resp[0].image,
+            fourthValue: resp[0].value,
+          },
+          () => {
+            this.standDraw(this.state.fourthValue)
+          }
+        )
+      } else {
+        this.setState(
+          {
+            fifthCard: resp[0].image,
+            fifthValue: resp[0].value,
+          },
+          () => {
+            this.standDraw(this.state.fifthValue)
+          }
+        )
+      }
     })
   }
   stand = () => {}
@@ -204,6 +214,15 @@ export default class Game extends Component {
               height: "280px",
             }}
             src={this.state.fourthCard}
+            alt=""
+          />
+          <img
+            style={{
+              display: this.state.fourthValue !== "" ? "inline" : "none",
+              width: "200px",
+              height: "280px",
+            }}
+            src={this.state.fifthCard}
             alt=""
           />
 
