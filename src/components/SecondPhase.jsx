@@ -18,12 +18,16 @@ export default class SecondPhase extends Component {
     fifthCard:
       "https://i.pinimg.com/originals/10/80/a4/1080a4bd1a33cec92019fab5efb3995d.png",
     fifthValue: "",
+    lastCard:
+      "https://i.pinimg.com/originals/10/80/a4/1080a4bd1a33cec92019fab5efb3995d.png",
+    lastValue: "",
     showGame: false,
-    hitValue: 0,
+    hitValue: "",
     over: false,
     money: this.props.money,
     bet: this.props.bet,
     winnings: 0,
+    lastTime: false,
   }
 
   calculateScore = () => {
@@ -88,23 +92,18 @@ export default class SecondPhase extends Component {
       return (this.state.dealerTotal += Number(this.props.thirdValue))
     }
   }
-  hitScore = () => {
-    console.log("ASD")
-    if (
-      this.state.hitValue === "KING" ||
-      this.state.hitValue === "QUEEN" ||
-      this.state.hitValue === "JACK"
-    ) {
+  hitScore = (value) => {
+    console.log(value)
+    if (value === "KING" || value === "QUEEN" || value === "JACK") {
       this.setState({ total: (this.state.total += 10) })
-    } else if (this.state.hitValue === "ACE") {
+    } else if (value === "ACE") {
       if ((this.state.total += 11 > 21)) {
         this.setState({ total: (this.state.total += 1) })
       }
       this.setState({ total: (this.state.total += 11) })
     } else {
-      console.log("ASD")
       this.setState({
-        total: (this.state.total += Number(this.state.hitValue)),
+        total: (this.state.total += Number(value)),
       })
     }
   }
@@ -127,16 +126,29 @@ export default class SecondPhase extends Component {
   }
   hitDraw = () => {
     hit().then((resp) => {
-      this.setState(
-        {
-          hitCard: resp[0].image,
-          hitValue: resp[0].value,
-          hitTime: true,
-        },
-        () => {
-          this.hitScore()
-        }
-      )
+      if (this.state.hitValue === "") {
+        this.setState(
+          {
+            hitCard: resp[0].image,
+            hitValue: resp[0].value,
+            hitTime: true,
+          },
+          () => {
+            this.hitScore(this.state.hitValue)
+          }
+        )
+      } else {
+        this.setState(
+          {
+            lastCard: resp[0].image,
+            lastValue: resp[0].value,
+            lastTime: true,
+          },
+          () => {
+            this.hitScore(this.state.lastValue)
+          }
+        )
+      }
     })
   }
   dealerDraw = () => {
@@ -227,6 +239,15 @@ export default class SecondPhase extends Component {
               height: "280px",
             }}
             src={this.state.hitCard}
+            alt=""
+          />
+          <img
+            style={{
+              display: this.state.hitValue !== "" ? "inline" : "none",
+              width: "200px",
+              height: "280px",
+            }}
+            src={this.state.lastCard}
             alt=""
           />
           <img
