@@ -14,6 +14,7 @@ export default class Game extends Component {
     thirdCard: this.props.thirdCard,
     fourthCard:
       "https://i.pinimg.com/originals/10/80/a4/1080a4bd1a33cec92019fab5efb3995d.png",
+    fourthValue: "",
     showGame: false,
     hitValue: 0,
     over: false,
@@ -90,7 +91,25 @@ export default class Game extends Component {
       })
     }
   }
-  b = () => {
+  standDraw = () => {
+    console.log(this.props.firstValue)
+    if (
+      this.state.fourthValue === "KING" ||
+      this.state.fourthValue === "QUEEN" ||
+      this.state.fourthValue === "JACK"
+    ) {
+      this.setState({ dealerTotal: (this.state.dealerTotal += 10) })
+    } else if (this.state.fourthValue === "ACE") {
+      this.setState({
+        dealerTotal: (this.state.dealerTotal += 11),
+      })
+    } else {
+      this.setState({
+        dealerTotal: (this.state.dealerTotal += Number(this.state.fourthValue)),
+      })
+    }
+  }
+  hitDraw = () => {
     hit().then((resp) => {
       this.setState(
         {
@@ -104,9 +123,23 @@ export default class Game extends Component {
       )
     })
   }
-
+  dealerDraw = () => {
+    hit().then((resp) => {
+      console.log(resp)
+      this.setState(
+        {
+          fourthCard: resp[0].image,
+          fourthValue: resp[0].value,
+        },
+        () => {
+          this.standDraw()
+        }
+      )
+    })
+  }
+  stand = () => {}
   render() {
-    if (this.state.hitTime === false) {
+    if (this.state.hitTime === false && this.state.fourthValue === "") {
       this.calculateScore()
       this.dealerScore()
     }
@@ -166,8 +199,8 @@ export default class Game extends Component {
             alt=""
           />
 
-          <button onClick={this.b}>Hit</button>
-          <button>Stand</button>
+          <button onClick={this.hitDraw}>Hit</button>
+          <button onClick={this.dealerDraw}>Stand</button>
           <h2>{this.state.total}</h2>
           <h2>Bet: {this.props.bet}</h2>
           <h2>Money: {this.props.money}</h2>
