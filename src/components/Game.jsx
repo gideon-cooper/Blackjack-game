@@ -19,19 +19,23 @@ export default class Game extends Component {
     first: false,
   }
   a = () => {
-    beginningDraw().then((resp) => {
-      this.setState({
-        firstCard: resp[0].image,
-        secondCard: resp[1].image,
-        thirdCard: resp[2].image,
-        firstValue: resp[0].value,
-        secondValue: resp[1].value,
-        thirdValue: resp[2].value,
-        showSecondPhase: true,
-        showGame: false,
-        first: true,
+    if (this.state.bet === 0) {
+      alert("Must bet atleast $5")
+    } else {
+      beginningDraw().then((resp) => {
+        this.setState({
+          firstCard: resp[0].image,
+          secondCard: resp[1].image,
+          thirdCard: resp[2].image,
+          firstValue: resp[0].value,
+          secondValue: resp[1].value,
+          thirdValue: resp[2].value,
+          showSecondPhase: true,
+          showGame: false,
+          first: true,
+        })
       })
-    })
+    }
   }
   increaseBet = (e) => {
     console.log(e.target.innerText)

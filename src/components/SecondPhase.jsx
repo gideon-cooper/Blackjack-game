@@ -100,6 +100,9 @@ export default class Game extends Component {
     ) {
       this.setState({ dealerTotal: (this.state.dealerTotal += 10) })
     } else if (this.state.fourthValue === "ACE") {
+      if ((this.state.dealerTotal += 11 > 21)) {
+        this.setState({ dealerTotal: (this.state.dealerTotal += 1) })
+      }
       this.setState({
         dealerTotal: (this.state.dealerTotal += 11),
       })
@@ -144,6 +147,11 @@ export default class Game extends Component {
       this.dealerScore()
     }
     if (this.state.total > 21 && this.state.over !== true) {
+      this.setState({
+        over: true,
+      })
+    }
+    if (this.state.dealerTotal >= 17 && this.state.over !== true) {
       this.setState({
         over: true,
       })
