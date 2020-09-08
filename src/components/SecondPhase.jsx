@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom"
 import { getDeck, beginningDraw, hit } from "../Cards"
 import GameOver from "./GameOver"
 
-export default class Game extends Component {
+export default class SecondPhase extends Component {
   state = {
     total: 0,
     dealerTotal: 0,
@@ -21,6 +21,9 @@ export default class Game extends Component {
     showGame: false,
     hitValue: 0,
     over: false,
+    money: this.props.money,
+    bet: this.props.bet,
+    winnings: 0,
   }
 
   calculateScore = () => {
@@ -51,6 +54,17 @@ export default class Game extends Component {
       this.props.secondValue === "ACE"
     ) {
       return (this.state.total += 12)
+    } else if (
+      (this.props.firstValue === "ACE" ||
+        this.props.firstValue === "KING" ||
+        this.props.firstValue === "QUEEN" ||
+        this.props.firstValue === "JACK") &&
+      (this.props.secondValue === "ACE" ||
+        this.props.firstValue === "KING" ||
+        this.props.firstValue === "QUEEN" ||
+        this.props.firstValue === "JACK")
+    ) {
+      return (this.state.total += 21)
     } else if (this.props.firstValue === "ACE") {
       return (this.state.total += 11 + Number(this.props.secondValue))
     } else if (this.props.secondValue === "ACE") {
@@ -157,8 +171,13 @@ export default class Game extends Component {
       this.dealerScore()
     }
     if (this.state.total > 21 && this.state.over !== true) {
+      const a = this.props.bet * 2 + this.props.money
+      console.log("----")
+      console.log(a)
+      console.log("----")
       this.setState({
         over: true,
+        winnings: a,
       })
     }
     if (this.state.dealerTotal >= 17 && this.state.over !== true) {
@@ -167,10 +186,15 @@ export default class Game extends Component {
       })
     }
 
+    console.log("HEYYYYY")
     return (
       <>
         <div style={{ display: this.props.showSecondPhase ? "block" : "none" }}>
-          <GameOver show={this.state.over} />
+          <GameOver
+            money={this.state.winnings}
+            bet={this.props.bet}
+            show={this.state.over}
+          />
           <img
             style={{
               display: this.state.showGame ? "none" : "inline",

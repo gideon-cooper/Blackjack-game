@@ -12,7 +12,7 @@ export default class Game extends Component {
     secondValue: "",
     thirdValue: "",
     bet: 0,
-    money: 100,
+    money: this.props.location.money || 100,
     total: 0,
     showSecondPhase: false,
     showGame: true,
@@ -51,6 +51,7 @@ export default class Game extends Component {
   calculateScore = () => {}
 
   render() {
+    console.log(this.props)
     getDeck()
 
     return (

@@ -3,20 +3,20 @@ import { Link, Redirect } from "react-router-dom"
 import { getDeck, beginningDraw } from "../Cards"
 import SecondPhase from "./SecondPhase"
 
-export default class GameOver extends Component {
+export default class Title extends Component {
   render() {
+    console.log(this.props)
     return (
-      <div style={{ display: this.props.show ? "block" : "none" }}>
-        <h1>Game Over</h1>
+      <div>
         {this.props.bet}
         <Link
           to={{
-            pathname: "/Title",
-            money: this.props.money,
-            bet: this.props.bet,
+            pathname: "/",
+            money: this.props.location.money,
+            bet: this.props.location.bet,
           }}
         >
-          Play Again?
+          asd
         </Link>
       </div>
     )
