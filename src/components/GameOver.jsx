@@ -6,9 +6,11 @@ import SecondPhase from "./SecondPhase"
 export default class GameOver extends Component {
   render() {
     return (
-      <div style={{ display: this.props.show ? "block" : "none" }}>
+      <div
+        className="gameOverContainer"
+        style={{ display: this.props.show ? "block" : "none" }}
+      >
         <h1>Game Over</h1>
-        {this.props.bet}
         <Link
           to={{
             pathname: "/Title",
@@ -16,7 +18,7 @@ export default class GameOver extends Component {
             bet: this.props.bet,
           }}
         >
-          <button>Play Again?</button>
+          <button className="playAgain">Play Again</button>
         </Link>
       </div>
     )

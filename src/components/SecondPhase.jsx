@@ -22,7 +22,7 @@ export default class SecondPhase extends Component {
       "https://i.pinimg.com/originals/10/80/a4/1080a4bd1a33cec92019fab5efb3995d.png",
     lastValue: "",
     showGame: false,
-    hitValue: "",
+    hitValue: 0,
     over: false,
     money: this.props.money,
     bet: this.props.bet,
@@ -126,7 +126,7 @@ export default class SecondPhase extends Component {
   }
   hitDraw = () => {
     hit().then((resp) => {
-      if (this.state.hitValue === "") {
+      if (this.state.hitValue === 0) {
         this.setState(
           {
             hitCard: resp[0].image,
@@ -277,14 +277,21 @@ export default class SecondPhase extends Component {
             src={this.state.fifthCard}
             alt=""
           />
+          <div className="gameButtonContainer">
+            <button className="gameButton" onClick={this.hitDraw}>
+              Hit
+            </button>
+            <button className="gameButton" onClick={this.dealerDraw}>
+              Stand
+            </button>
+            <button
+              className="gameButton"
+              style={{ display: this.state.hitValue === 0 ? "inline" : "none" }}
+            >
+              Double
+            </button>
+          </div>
 
-          <button onClick={this.hitDraw}>Hit</button>
-          <button onClick={this.dealerDraw}>Stand</button>
-          <button
-            style={{ display: this.state.hitValue !== 0 ? "none" : "inline" }}
-          >
-            Double
-          </button>
           <h2>{this.state.total}</h2>
           <h2>Bet: {this.props.bet}</h2>
           <h2>Money: {this.props.money}</h2>

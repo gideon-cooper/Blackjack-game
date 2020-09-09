@@ -71,7 +71,11 @@ export default class Game extends Component {
             showGame={this.state.showGame}
             first={this.state.first}
           />
-          <div style={{ display: this.state.showGame ? "block" : "none" }}>
+          <div
+            className="betContainer"
+            style={{ display: this.state.showGame ? "block" : "none" }}
+          >
+            <h2 className="placeBet">Place your bets</h2>
             <button className="betButton-1" onClick={this.increaseBet}>
               10
             </button>
@@ -84,14 +88,16 @@ export default class Game extends Component {
             <button className="betButton-4" onClick={this.increaseBet}>
               50
             </button>
-            <button className="dealButton" onClick={this.a}>
-              Deal
-            </button>
-            <h2 style={{ display: this.state.showGame ? "none" : "block" }}>
-              {this.state.total}
-            </h2>
-            <h2>Bet: {this.state.bet}</h2>
-            <h2>Money: {this.state.money}</h2>
+            <div className="dealContainer">
+              <button className="dealButton" onClick={this.a}>
+                Deal
+              </button>
+              <h2 style={{ display: this.state.showGame ? "none" : "block" }}>
+                {this.state.total}
+              </h2>
+              <h2>Bet: {this.state.bet}</h2>
+              <h2>Money: {this.state.money}</h2>
+            </div>
           </div>
         </div>
       </>

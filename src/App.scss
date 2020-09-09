@@ -3,7 +3,7 @@
   padding: 40px;
   outline: none;
   cursor: pointer;
-  margin-left: 5px;
+  margin: 5px;
   &:hover {
     background-color: rgb(230, 221, 221);
   }
@@ -13,12 +13,19 @@
 }
 %btn-shared {
   border-radius: 20px;
-  padding: 10px 25px;
+  font-size: 20px;
+  padding: 15px 40px;
   outline: none;
   cursor: pointer;
   border: transparent;
   background-color: goldenrod;
   color: white;
+  &:hover {
+    background-color: rgb(235, 180, 43);
+  }
+  &:active {
+    background-color: goldenrod;
+  }
 }
 * {
   margin: 0;
@@ -26,12 +33,13 @@
 }
 body {
   background: linear-gradient(
-    90deg,
+    to left,
     rgba(23, 71, 5, 1) 15%,
     rgba(38, 122, 26, 1) 50%,
     rgba(23, 71, 5, 1) 85%
   );
   font-family: "Roboto", sans-serif;
+  color: white;
 }
 .App {
   display: flex;
@@ -41,6 +49,8 @@ body {
 }
 h1 {
   text-align: center;
+  letter-spacing: 10px;
+  font-size: 7 0px;
 }
 .betButton {
   &-1 {
@@ -84,11 +94,30 @@ h1 {
     }
   }
 }
+.dealContainer {
+  text-align: center;
+  h2 {
+    text-align: left;
+  }
+}
+.placeBet {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 30px;
+}
 .dealButton {
   @extend %btn-shared;
-  text-align: center;
-  display: block;
+  margin-top: 2rem;
 }
 .playGame {
   @extend %btn-shared;
+}
+.gameButton {
+  @extend %btn-shared;
+}
+.playAgain {
+  @extend %btn-shared;
+}
+.gameOverContainer {
+  text-align: center;
 }
