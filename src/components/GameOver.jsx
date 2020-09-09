@@ -16,7 +16,7 @@ export default class GameOver extends Component {
             bet: this.props.bet,
           }}
         >
-          Play Again?
+          <button>Play Again?</button>
         </Link>
       </div>
     )

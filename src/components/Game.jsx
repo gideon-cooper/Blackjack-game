@@ -77,7 +77,9 @@ export default class Game extends Component {
             <button onClick={this.increaseBet}>10</button>
             <button onClick={this.increaseBet}>20</button>
             <button onClick={this.increaseBet}>50</button>
-            <h2>{this.state.total}</h2>
+            <h2 style={{ display: this.state.showGame ? "none" : "block" }}>
+              {this.state.total}
+            </h2>
             <h2>Bet: {this.state.bet}</h2>
             <h2>Money: {this.state.money}</h2>
           </div>

@@ -48,17 +48,6 @@ export default class SecondPhase extends Component {
     ) {
       return (this.state.total += 10 + Number(this.props.secondValue))
     } else if (
-      this.props.secondValue === "KING" ||
-      this.props.secondValue === "QUEEN" ||
-      this.props.secondValue === "JACK"
-    ) {
-      return (this.state.total += 10 + Number(this.props.firstValue))
-    } else if (
-      this.props.firstValue === "ACE" &&
-      this.props.secondValue === "ACE"
-    ) {
-      return (this.state.total += 12)
-    } else if (
       (this.props.firstValue === "ACE" ||
         this.props.firstValue === "KING" ||
         this.props.firstValue === "QUEEN" ||
@@ -69,6 +58,17 @@ export default class SecondPhase extends Component {
         this.props.firstValue === "JACK")
     ) {
       return (this.state.total += 21)
+    } else if (
+      this.props.secondValue === "KING" ||
+      this.props.secondValue === "QUEEN" ||
+      this.props.secondValue === "JACK"
+    ) {
+      return (this.state.total += 10 + Number(this.props.firstValue))
+    } else if (
+      this.props.firstValue === "ACE" &&
+      this.props.secondValue === "ACE"
+    ) {
+      return (this.state.total += 12)
     } else if (this.props.firstValue === "ACE") {
       return (this.state.total += 11 + Number(this.props.secondValue))
     } else if (this.props.secondValue === "ACE") {

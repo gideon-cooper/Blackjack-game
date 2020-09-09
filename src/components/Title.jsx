@@ -11,7 +11,7 @@ export default class Title extends Component {
         {this.props.bet}
         <Redirect
           to={{
-            pathname: "/",
+            pathname: "/Game",
             money: this.props.location.money,
             bet: this.props.location.bet,
           }}

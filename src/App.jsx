@@ -7,6 +7,7 @@ import GameOver from "./components/GameOver"
 import Title from "./components/Title"
 
 import "./App.scss"
+import TitlePage from "./components/TitlePage"
 
 export default class App extends React.Component {
   render() {
@@ -14,7 +15,8 @@ export default class App extends React.Component {
       <>
         <h1>Blackjack</h1>
         <div className="App">
-          <Route exact path="/" component={Game} />
+          <Route exact path="/" component={TitlePage} />
+          <Route path="/Game" component={Game} />
           <Route path="/SecondPhase" component={SecondPhase} />
           <Route path="/Title" component={Title} />
           <Route path="/GameOver" component={GameOver} />
