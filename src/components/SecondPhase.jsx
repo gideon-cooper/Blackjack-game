@@ -214,69 +214,78 @@ export default class SecondPhase extends Component {
             bet={this.props.bet}
             show={this.state.over}
           />
-          <img
-            style={{
-              display: this.state.showGame ? "none" : "inline",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.props.firstCard}
-            alt=""
-          />
-          <img
-            style={{
-              display: this.state.showGame ? "none" : "inline",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.props.secondCard}
-            alt=""
-          />
-          <img
-            style={{
-              display: this.state.hitTime ? "inline" : "none",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.state.hitCard}
-            alt=""
-          />
-          <img
-            style={{
-              display: this.state.lastValue !== "" ? "inline" : "none",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.state.lastCard}
-            alt=""
-          />
-          <img
-            style={{
-              display: this.state.showGame ? "none" : "inline",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.props.thirdCard}
-            alt=""
-          />
-          <img
-            style={{
-              display: this.state.showGame ? "none" : "inline",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.state.fourthCard}
-            alt=""
-          />
-          <img
-            style={{
-              display: this.state.fourthValue !== "" ? "inline" : "none",
-              width: "200px",
-              height: "280px",
-            }}
-            src={this.state.fifthCard}
-            alt=""
-          />
+          <div className="cardContainer">
+            <div className="playerContainer">
+              <h2>Your hand</h2>
+              <img
+                style={{
+                  display: this.state.showGame ? "none" : "inline",
+                  width: "170px",
+                  height: "250px",
+                }}
+                src={this.props.firstCard}
+                alt=""
+              />
+              <img
+                style={{
+                  display: this.state.showGame ? "none" : "inline",
+                  width: "170px",
+                  height: "250px",
+                }}
+                src={this.props.secondCard}
+                alt=""
+              />
+              <img
+                style={{
+                  display: this.state.hitTime ? "inline" : "none",
+                  width: "170px",
+                  height: "250px",
+                }}
+                src={this.state.hitCard}
+                alt=""
+              />
+              <img
+                style={{
+                  display: this.state.lastValue !== "" ? "inline" : "none",
+                  width: "170px",
+                  height: "250px",
+                }}
+                src={this.state.lastCard}
+                alt=""
+              />
+            </div>
+            <div className="dealerContainer">
+              <h2>Dealers hand</h2>
+              <img
+                style={{
+                  display: this.state.showGame ? "none" : "inline",
+                  width: "170px",
+                  height: "250px",
+                }}
+                src={this.props.thirdCard}
+                alt=""
+              />
+              <img
+                style={{
+                  display: this.state.showGame ? "none" : "inline",
+                  width: "170px",
+                  height: "250px",
+                }}
+                src={this.state.fourthCard}
+                alt=""
+              />
+              <img
+                style={{
+                  display: this.state.fourthValue !== "" ? "inline" : "none",
+                  width: "170px",
+                  height: "250px",
+                }}
+                src={this.state.fifthCard}
+                alt=""
+              />
+            </div>
+          </div>
+
           <div className="gameButtonContainer">
             <button className="gameButton" onClick={this.hitDraw}>
               Hit
@@ -292,10 +301,10 @@ export default class SecondPhase extends Component {
             </button>
           </div>
 
-          <h2>{this.state.total}</h2>
+          <h2>Player value: {this.state.total}</h2>
           <h2>Bet: {this.props.bet}</h2>
           <h2>Money: {this.props.money}</h2>
-          <h2>{this.state.dealerTotal}</h2>
+          <h2>Dealer value: {this.state.dealerTotal}</h2>
         </div>
       </>
     )

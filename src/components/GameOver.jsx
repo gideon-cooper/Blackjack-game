@@ -10,7 +10,7 @@ export default class GameOver extends Component {
         className="gameOverContainer"
         style={{ display: this.props.show ? "block" : "none" }}
       >
-        <h1>Game Over</h1>
+        <h1></h1>
         <Link
           to={{
             pathname: "/Title",
