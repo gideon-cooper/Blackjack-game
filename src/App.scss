@@ -1,11 +1,37 @@
-$mainColor: rgb(23, 122, 23);
-
+%deal-btn-shared {
+  border-radius: 100px;
+  padding: 40px;
+  outline: none;
+  cursor: pointer;
+  margin-left: 5px;
+  &:hover {
+    background-color: rgb(230, 221, 221);
+  }
+  &:active {
+    background-color: white;
+  }
+}
+%btn-shared {
+  border-radius: 20px;
+  padding: 10px 25px;
+  outline: none;
+  cursor: pointer;
+  border: transparent;
+  background-color: goldenrod;
+  color: white;
+}
 * {
   margin: 0;
   padding: 0;
 }
 body {
-  background-color: $mainColor;
+  background: linear-gradient(
+    90deg,
+    rgba(23, 71, 5, 1) 15%,
+    rgba(38, 122, 26, 1) 50%,
+    rgba(23, 71, 5, 1) 85%
+  );
+  font-family: "Roboto", sans-serif;
 }
 .App {
   display: flex;
@@ -15,4 +41,54 @@ body {
 }
 h1 {
   text-align: center;
+}
+.betButton {
+  &-1 {
+    @extend %deal-btn-shared;
+    border: blue solid 20px;
+    &:hover {
+      border: rgb(20, 20, 161) solid 20px;
+    }
+    &:active {
+      border: blue solid 20px;
+    }
+  }
+  &-2 {
+    @extend %deal-btn-shared;
+    border: rgb(230, 8, 8) solid 20px;
+    &:hover {
+      border: rgb(119, 8, 8) solid 20px;
+    }
+    &:active {
+      border: red solid 20px;
+    }
+  }
+  &-3 {
+    @extend %deal-btn-shared;
+    border: peru solid 20px;
+    &:hover {
+      border: rgb(177, 107, 37) solid 20px;
+    }
+    &:active {
+      border: peru solid 20px;
+    }
+  }
+  &-4 {
+    @extend %deal-btn-shared;
+    border: rgb(53, 50, 50) solid 20px;
+    &:hover {
+      border: black solid 20px;
+    }
+    &:active {
+      border: rgb(53, 50, 50) solid 20px;
+    }
+  }
+}
+.dealButton {
+  @extend %btn-shared;
+  text-align: center;
+  display: block;
+}
+.playGame {
+  @extend %btn-shared;
 }

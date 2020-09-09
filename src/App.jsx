@@ -14,6 +14,7 @@ export default class App extends React.Component {
     return (
       <>
         <h1>Blackjack</h1>
+
         <div className="App">
           <Route exact path="/" component={TitlePage} />
           <Route path="/Game" component={Game} />

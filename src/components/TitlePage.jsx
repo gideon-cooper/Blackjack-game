@@ -6,7 +6,7 @@ export default class TitlePage extends Component {
     return (
       <div>
         <Link to="/Game">
-          <button>Play Game</button>
+          <button className="playGame">Play Game</button>
         </Link>
       </div>
     )

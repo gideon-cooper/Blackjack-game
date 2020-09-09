@@ -42,22 +42,22 @@ export default class SecondPhase extends Component {
     ) {
       return (this.state.total += 20)
     } else if (
-      this.props.firstValue === "KING" ||
-      this.props.firstValue === "QUEEN" ||
-      this.props.firstValue === "JACK"
-    ) {
-      return (this.state.total += 10 + Number(this.props.secondValue))
-    } else if (
       (this.props.firstValue === "ACE" ||
         this.props.firstValue === "KING" ||
         this.props.firstValue === "QUEEN" ||
         this.props.firstValue === "JACK") &&
       (this.props.secondValue === "ACE" ||
-        this.props.firstValue === "KING" ||
-        this.props.firstValue === "QUEEN" ||
-        this.props.firstValue === "JACK")
+        this.props.secondValue === "KING" ||
+        this.props.secondValue === "QUEEN" ||
+        this.props.secondValue === "JACK")
     ) {
       return (this.state.total += 21)
+    } else if (
+      this.props.firstValue === "KING" ||
+      this.props.firstValue === "QUEEN" ||
+      this.props.firstValue === "JACK"
+    ) {
+      return (this.state.total += 10 + Number(this.props.secondValue))
     } else if (
       this.props.secondValue === "KING" ||
       this.props.secondValue === "QUEEN" ||
@@ -182,7 +182,7 @@ export default class SecondPhase extends Component {
       this.calculateScore()
       this.dealerScore()
     }
-    if (this.state.total === 21) {
+    if (this.state.total === 21 && this.state.over !== true) {
       const b = this.props.bet * 2.5 + this.props.money
       this.setState({
         over: true,
@@ -243,7 +243,7 @@ export default class SecondPhase extends Component {
           />
           <img
             style={{
-              display: this.state.hitValue !== "" ? "inline" : "none",
+              display: this.state.lastValue !== "" ? "inline" : "none",
               width: "200px",
               height: "280px",
             }}
