@@ -155,7 +155,6 @@ export default class SecondPhase extends Component {
     })
   }
   dealerDraw = () => {
-    
     hit().then((resp) => {
       if (this.state.fourthValue === "") {
         this.setState(
