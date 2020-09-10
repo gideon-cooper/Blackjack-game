@@ -10,7 +10,11 @@ export default class GameOver extends Component {
         className="gameOverContainer"
         style={{ display: this.props.show ? "block" : "none" }}
       >
-        <h1></h1>
+        <h1>
+          {this.props.money - this.props.original > 0
+            ? `You won $${this.props.bet * 2}`
+            : "You lost"}
+        </h1>
         <Link
           to={{
             pathname: "/Title",

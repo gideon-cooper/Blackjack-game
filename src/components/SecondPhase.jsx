@@ -189,6 +189,16 @@ export default class SecondPhase extends Component {
         winnings: b,
       })
     } else if (
+      this.state.total >= 17 &&
+      this.state.dealerTotal >= 17 &&
+      this.state.total === this.state.dealerTotal &&
+      this.state.over !== true
+    ) {
+      this.setState({
+        over: true,
+        winnings: this.props.money,
+      })
+    } else if (
       this.state.total < 21 &&
       this.state.dealerTotal >= 17 &&
       this.state.over !== true
@@ -210,6 +220,7 @@ export default class SecondPhase extends Component {
       <>
         <div style={{ display: this.props.showSecondPhase ? "block" : "none" }}>
           <GameOver
+            original={this.state.money}
             money={this.state.winnings}
             bet={this.props.bet}
             show={this.state.over}
@@ -295,7 +306,12 @@ export default class SecondPhase extends Component {
             </button>
             <button
               className="gameButton"
-              style={{ display: this.state.hitValue === 0 ? "inline" : "none" }}
+              style={{
+                display:
+                  this.state.hitValue === 0 && this.state.fourthValue === ""
+                    ? "inline"
+                    : "none",
+              }}
             >
               Double
             </button>
