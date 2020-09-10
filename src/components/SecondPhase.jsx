@@ -116,10 +116,11 @@ export default class SecondPhase extends Component {
     } else if (value === "ACE") {
       if ((this.state.dealerTotal += 11 > 21)) {
         this.setState({ dealerTotal: (this.state.dealerTotal += 1) })
+      } else {
+        this.setState({
+          dealerTotal: (this.state.dealerTotal += 11),
+        })
       }
-      this.setState({
-        dealerTotal: (this.state.dealerTotal += 11),
-      })
     } else {
       this.setState({
         dealerTotal: (this.state.dealerTotal += Number(value)),
@@ -154,6 +155,7 @@ export default class SecondPhase extends Component {
     })
   }
   dealerDraw = () => {
+    
     hit().then((resp) => {
       if (this.state.fourthValue === "") {
         this.setState(
