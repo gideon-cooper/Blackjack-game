@@ -12,7 +12,11 @@ export default class GameOver extends Component {
       >
         <h1>
           {this.props.money - this.props.original > 0
-            ? `You won $${this.props.bet * 2}`
+            ? `You won $${
+                this.props.blackJack ? this.props.bet * 2.5 : this.props.bet * 2
+              }`
+            : this.props.sameCard
+            ? "Push to next round"
             : "You lost"}
         </h1>
         <Link

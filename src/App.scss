@@ -122,6 +122,9 @@ h1 {
 .gameOverContainer {
   text-align: center;
   margin-bottom: 6rem;
+  h1 {
+    margin-bottom: 2rem;
+  }
 }
 .cardContainer {
   display: flex;

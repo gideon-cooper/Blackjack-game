@@ -28,6 +28,8 @@ export default class SecondPhase extends Component {
     bet: this.props.bet,
     winnings: 0,
     lastTime: false,
+    blackJack: false,
+    sameCard: false,
   }
 
   calculateScore = () => {
@@ -41,6 +43,11 @@ export default class SecondPhase extends Component {
         this.props.secondValue === "JACK")
     ) {
       return (this.state.total += 20)
+    } else if (
+      this.props.firstValue === "ACE" &&
+      this.props.secondValue === "ACE"
+    ) {
+      return (this.state.total += 12)
     } else if (
       (this.props.firstValue === "ACE" ||
         this.props.firstValue === "KING" ||
@@ -64,11 +71,6 @@ export default class SecondPhase extends Component {
       this.props.secondValue === "JACK"
     ) {
       return (this.state.total += 10 + Number(this.props.firstValue))
-    } else if (
-      this.props.firstValue === "ACE" &&
-      this.props.secondValue === "ACE"
-    ) {
-      return (this.state.total += 12)
     } else if (this.props.firstValue === "ACE") {
       return (this.state.total += 11 + Number(this.props.secondValue))
     } else if (this.props.secondValue === "ACE") {
@@ -178,7 +180,11 @@ export default class SecondPhase extends Component {
   }
   stand = () => {}
   render() {
-    if (this.state.hitTime === false && this.state.fourthValue === "") {
+    if (
+      this.state.hitTime === false &&
+      this.state.fourthValue === "" &&
+      this.state.blackJack === false
+    ) {
       this.calculateScore()
       this.dealerScore()
     }
@@ -187,6 +193,7 @@ export default class SecondPhase extends Component {
       this.setState({
         over: true,
         winnings: b,
+        blackJack: true,
       })
     } else if (
       this.state.total >= 17 &&
@@ -197,10 +204,35 @@ export default class SecondPhase extends Component {
       this.setState({
         over: true,
         winnings: this.props.money,
+        sameCard: true,
       })
     } else if (
       this.state.total < 21 &&
+      this.state.total >= 17 &&
+      this.state.total > this.state.dealerTotal &&
       this.state.dealerTotal >= 17 &&
+      this.state.dealerTotal <= 21 &&
+      this.state.over !== true
+    ) {
+      const c = this.props.bet * 2.0 + this.props.money
+      this.setState({
+        over: true,
+        winnings: c,
+      })
+    } else if (
+      this.state.total < 21 &&
+      this.state.total < this.state.dealerTotal &&
+      this.state.dealerTotal >= 17 &&
+      this.state.dealerTotal <= 21 &&
+      this.state.over !== true
+    ) {
+      this.setState({
+        over: true,
+        winnings: this.props.money,
+      })
+    } else if (
+      this.state.total < 21 &&
+      this.state.dealerTotal >= 21 &&
       this.state.over !== true
     ) {
       const a = this.props.bet * 2 + this.props.money
@@ -224,10 +256,12 @@ export default class SecondPhase extends Component {
             money={this.state.winnings}
             bet={this.props.bet}
             show={this.state.over}
+            blackJack={this.state.blackJack}
+            sameCard={this.state.sameCard}
           />
           <div className="cardContainer">
             <div className="playerContainer">
-              <h2>Your hand</h2>
+              <h2>Your hand: {this.state.total}</h2>
               <img
                 style={{
                   display: this.state.showGame ? "none" : "inline",
@@ -266,7 +300,7 @@ export default class SecondPhase extends Component {
               />
             </div>
             <div className="dealerContainer">
-              <h2>Dealers hand</h2>
+              <h2>Dealers hand: {this.state.dealerTotal}</h2>
               <img
                 style={{
                   display: this.state.showGame ? "none" : "inline",
@@ -317,10 +351,10 @@ export default class SecondPhase extends Component {
             </button>
           </div>
 
-          <h2>Player value: {this.state.total}</h2>
+          {/* <h2>Player value: </h2>
+          <h2>Dealer value: </h2> */}
           <h2>Bet: {this.props.bet}</h2>
           <h2>Money: {this.props.money}</h2>
-          <h2>Dealer value: {this.state.dealerTotal}</h2>
         </div>
       </>
     )
